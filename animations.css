@@ -1,0 +1,67 @@
+/* ==========================================================================
+   NUVORA.AI — TIER 2 ANIMATIONS (CSS-only 3D / no WebGL)
+   Used on every page. Cheap, GPU-friendly, respects reduced-motion via
+   the global rule already declared in style.css.
+   ========================================================================== */
+
+/* Page-load fade/slide for hero copy (no JS needed) */
+@keyframes nv-rise {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.nv-rise { animation: nv-rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.nv-rise-delay-1 { animation-delay: .12s; }
+.nv-rise-delay-2 { animation-delay: .24s; }
+.nv-rise-delay-3 { animation-delay: .36s; }
+
+/* Logo micro-interaction */
+.brand img { transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+.brand:hover img { transform: rotate(8deg) scale(1.06); }
+
+/* Low-poly facet shimmer — used behind section headers as a subtle
+   nod to the faceted logo mark. Pure CSS, no images. */
+.facet-accent {
+  position: relative;
+  display: inline-block;
+}
+.facet-accent::after {
+  content: "";
+  position: absolute; right: -26px; top: -10px;
+  width: 16px; height: 16px;
+  background: var(--nv-orange);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  animation: nv-spin-flip 5s ease-in-out infinite;
+}
+@keyframes nv-spin-flip {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+}
+
+/* Loading shimmer (used only if content is fetched client-side, e.g. blog search) */
+.skeleton {
+  background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+  background-size: 400% 100%;
+  animation: nv-shimmer 1.4s ease infinite;
+  border-radius: var(--nv-radius-sm);
+}
+@keyframes nv-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* Scroll progress bar (article pages) */
+.reading-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--nv-orange), var(--nv-orange-light));
+  z-index: 200; transition: width .1s linear;
+}
+
+/* TOC link underline draw */
+.toc a {
+  position: relative; display: inline-block; padding-bottom: 2px;
+}
+.toc a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 1px; width: 0;
+  background: var(--nv-orange); transition: width .3s ease;
+}
+.toc a:hover::after { width: 100%; }
