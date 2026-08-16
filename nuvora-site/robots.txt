@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://ainovra-ai.github.io/sitemap.xml
